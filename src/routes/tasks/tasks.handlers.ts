@@ -1,9 +1,14 @@
 import type { AppRouteHandler } from "@/lib/types";
 import type { ListRoute } from "@/routes/tasks/tasks.routes";
 
-export const list: AppRouteHandler<ListRoute> = (c) => {
-  return c.json([{
-    name: "Learn Hono",
-    done: false,
-  }]);
+import db from "@/db";
+import { tasks } from "@/db/schema";
+
+export const list: AppRouteHandler<ListRoute> = async (c) => {
+  const result = await db.select({
+    name: tasks.name,
+    done: tasks.done,
+  }).from(tasks);
+
+  return c.json(result);
 };
