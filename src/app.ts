@@ -2,7 +2,7 @@ import type { PinoLogger } from "hono-pino";
 
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { requestId } from "hono/request-id";
-import { notFound, onError } from "stoker/middlewares";
+import { notFound, onError, serveEmojiFavicon } from "stoker/middlewares";
 
 import { pinoLogger } from "./middleware/pino-logger";
 
@@ -13,6 +13,8 @@ interface AppBindings {
 }
 
 const app = new OpenAPIHono<AppBindings>();
+app.use(serveEmojiFavicon("🔥"));
+
 app.use(requestId());
 app.use(pinoLogger());
 
