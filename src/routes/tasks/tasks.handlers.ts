@@ -5,10 +5,7 @@ import db from "@/db";
 import { tasks } from "@/db/schema";
 
 export const list: AppRouteHandler<ListRoute> = async (c) => {
-  const rows = await db.select({
-    name: tasks.name,
-    done: tasks.done,
-  }).from(tasks);
+  const rows = await db.select().from(tasks);
 
   return c.json(rows);
 };
