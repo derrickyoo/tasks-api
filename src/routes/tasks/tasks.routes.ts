@@ -1,8 +1,8 @@
 import { createRoute, z } from "@hono/zod-openapi";
 import * as HttpStatusCodes from "stoker/http-status-codes";
-import { jsonContent } from "stoker/openapi/helpers";
+import { jsonContent, jsonContentRequired } from "stoker/openapi/helpers";
 
-import { taskSelectSchema } from "@/db/schema";
+import { taskInsertSchema, taskSelectSchema } from "@/db/schema";
 
 const tags = ["Tasks"];
 
@@ -19,3 +19,23 @@ export const list = createRoute({
 });
 
 export type ListRoute = typeof list;
+
+export const create = createRoute({
+  path: "/tasks",
+  method: "post",
+  request: {
+    body: jsonContentRequired(
+      taskInsertSchema,
+      "The task to create",
+    ),
+  },
+  tags,
+  responses: {
+    [HttpStatusCodes.OK]: jsonContent(
+      taskInsertSchema,
+      "The created task",
+    ),
+  },
+});
+
+export type CreateRoute = typeof create;

@@ -1,5 +1,5 @@
 import type { AppRouteHandler } from "@/lib/types";
-import type { ListRoute } from "@/routes/tasks/tasks.routes";
+import type { CreateRoute, ListRoute } from "@/routes/tasks/tasks.routes";
 
 import db from "@/db";
 import { tasks } from "@/db/schema";
@@ -8,4 +8,11 @@ export const list: AppRouteHandler<ListRoute> = async (c) => {
   const rows = await db.select().from(tasks);
 
   return c.json(rows);
+};
+
+export const create: AppRouteHandler<CreateRoute> = async (c) => {
+  const task = c.req.valid("json");
+  const [result] = await db.insert(tasks).values(task).returning();
+
+  return c.json(result);
 };
