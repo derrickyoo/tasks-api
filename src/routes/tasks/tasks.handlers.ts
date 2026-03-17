@@ -5,14 +5,20 @@ import db from "@/db";
 import { tasks } from "@/db/schema";
 
 export const list: AppRouteHandler<ListRoute> = async (c) => {
-  const rows = await db.select().from(tasks);
+  const rows = await db.select({
+    id: tasks.id,
+    name: tasks.name,
+    done: tasks.done,
+    createdAt: tasks.createdAt,
+    updatedAt: tasks.updatedAt,
+  }).from(tasks);
 
   return c.json(rows);
 };
 
 export const create: AppRouteHandler<CreateRoute> = async (c) => {
   const task = c.req.valid("json");
-  const [result] = await db.insert(tasks).values(task).returning();
+  const [inserted] = await db.insert(tasks).values(task).returning();
 
-  return c.json(result);
+  return c.json(inserted);
 };

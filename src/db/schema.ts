@@ -1,4 +1,3 @@
-import { } from "drizzle-orm/";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
@@ -17,9 +16,11 @@ export const tasks = sqliteTable("tasks", {
 });
 
 export const taskSelectSchema = createSelectSchema(tasks);
-export const taskInsertSchema = createInsertSchema(tasks)
+
+export const taskInsertSchema = createInsertSchema(tasks, {
+  name: field => field.min(1).max(250),
+})
   .required({
-    name: true,
     done: true,
   })
   .omit({
