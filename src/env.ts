@@ -11,6 +11,14 @@ const EnvSchema = z.object({
   LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace"]),
 });
 
-const env = EnvSchema.parse(process.env);
+export type Env = z.infer<typeof EnvSchema>;
 
-export default env;
+const { data: env, error } = EnvSchema.safeParse(process.env);
+
+if (error) {
+  console.error("❌ Invalid env:");
+  console.error(JSON.stringify(error.flatten().fieldErrors, null, 2));
+  process.exit(1);
+}
+
+export default env!;
