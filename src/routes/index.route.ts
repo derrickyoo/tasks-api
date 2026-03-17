@@ -20,9 +20,10 @@ router.openapi(createRoute({
       description: "Tasks API Index",
     },
   },
-
 }), (c) => {
   return c.json({
     message: "Tasks API",
   }, HttpStatusCodes.OK);
 });
+
+export default router;

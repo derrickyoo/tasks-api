@@ -1,16 +1,17 @@
+import configOpenAPI from "@/lib/config-open-api";
 import createApp from "@/lib/create-app";
-
-import configOpenAPI from "./lib/config-open-api";
+import index from "@/routes/index.route";
 
 const app = createApp();
+
+const routes = [
+  index,
+];
+
 configOpenAPI(app);
 
-app.get("/", (c) => {
-  return c.text("Hello Hono!");
-});
-
-app.get("/error", () => {
-  throw new Error("Error route");
+routes.forEach((route) => {
+  app.route("/", route);
 });
 
 export default app;
