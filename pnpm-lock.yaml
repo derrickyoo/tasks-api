@@ -14,6 +14,9 @@ importers:
       '@hono/zod-openapi':
         specifier: ^1.2.2
         version: 1.2.2(hono@4.12.8)(zod@4.3.6)
+      '@scalar/hono-api-reference':
+        specifier: ^0.10.3
+        version: 0.10.3(hono@4.12.8)
       dotenv:
         specifier: ^17.3.1
         version: 17.3.1
@@ -1018,6 +1021,24 @@ packages:
     resolution: {integrity: sha512-2HRCml6OztYXyJXAvdDXPKcawukWY2GpR5/nxKp4iBgiO3wcoEGkAaqctIbZcNB6KlUQBIqt8VYkNSj2397EfA==}
     cpu: [x64]
     os: [win32]
+
+  '@scalar/core@0.4.3':
+    resolution: {integrity: sha512-Fp/J5RyajknwZrDG5/nsJRxL07cS2gJ9wvnvIWcFgsR8HWy/7qMQ+PtpYhdBmMYiBAql1JJobKTu/7ZWqnHaFA==}
+    engines: {node: '>=22'}
+
+  '@scalar/helpers@0.4.1':
+    resolution: {integrity: sha512-XfyYqSUA597wfzS8lmMY1xvYv4si2WytuoBWj7JDpx3E/lVq7YEsticXF/Q30ttFVRBfgQErg8MQI6b6IkZr2Q==}
+    engines: {node: '>=22'}
+
+  '@scalar/hono-api-reference@0.10.3':
+    resolution: {integrity: sha512-bdueh25lDTx8US5qJux4L3LlkXwqe64kUnPEGqFmjAYfNfDJI3KknCgq43P9aikO07wnqpPNRYGj8sxOEubidw==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      hono: ^4.12.5
+
+  '@scalar/types@0.7.3':
+    resolution: {integrity: sha512-9ThydMH28aA5DMm8Q/nTKXKnAKejG7Awlj7IC99oXkq5aOJ60Sn0kS1RWaqQosaWI3ezyPJ7/sUglssAEMA6EA==}
+    engines: {node: '>=22'}
 
   '@stylistic/eslint-plugin@5.10.0':
     resolution: {integrity: sha512-nPK52ZHvot8Ju/0A4ucSX1dcPV2/1clx0kLcH5wDmrE4naKso7TUC/voUyU1O9OTKTrR6MYip6LP0ogEMQ9jPQ==}
@@ -2111,6 +2132,11 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  nanoid@5.1.7:
+    resolution: {integrity: sha512-ua3NDgISf6jdwezAheMOk4mbE1LXjm1DfMUDMuJf4AqxLFK3ccGpgWizwa5YV7Yz9EpXwEaWoRXSb/BnV0t5dQ==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
@@ -2431,6 +2457,10 @@ packages:
     resolution: {integrity: sha512-Bh7QjT8/SuKUIfObSXNHNSK6WHo6J1tHCqJsuaFDP7gP0fkzSfTxI8y85JrppZ0h8l0maIgc2tfuZQ6/t3GtnQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
+  tagged-tag@1.0.0:
+    resolution: {integrity: sha512-yEFYrVhod+hdNyx7g5Bnkkb0G6si8HJurOoOEgC8B/O0uXLHlaey/65KRv6cuWBNhBgHKAROVpc7QyYqE5gFng==}
+    engines: {node: '>=20'}
+
   tapable@2.3.0:
     resolution: {integrity: sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==}
     engines: {node: '>=6'}
@@ -2505,6 +2535,10 @@ packages:
   type-fest@4.2.0:
     resolution: {integrity: sha512-5zknd7Dss75pMSED270A1RQS3KloqRJA9XbXLe0eCxyw7xXFb3rd+9B0UQ/0E+LQT6lnrLviEolYORlRWamn4w==}
     engines: {node: '>=16'}
+
+  type-fest@5.4.4:
+    resolution: {integrity: sha512-JnTrzGu+zPV3aXIUhnyWJj4z/wigMsdYajGLIYakqyOW1nPllzXEJee0QQbHj+CTIQtXGlAjuK0UY+2xTyjVAw==}
+    engines: {node: '>=20'}
 
   typescript@5.9.3:
     resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
@@ -3271,6 +3305,24 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.59.0':
     optional: true
+
+  '@scalar/core@0.4.3':
+    dependencies:
+      '@scalar/types': 0.7.3
+
+  '@scalar/helpers@0.4.1': {}
+
+  '@scalar/hono-api-reference@0.10.3(hono@4.12.8)':
+    dependencies:
+      '@scalar/core': 0.4.3
+      hono: 4.12.8
+
+  '@scalar/types@0.7.3':
+    dependencies:
+      '@scalar/helpers': 0.4.1
+      nanoid: 5.1.7
+      type-fest: 5.4.4
+      zod: 4.3.6
 
   '@stylistic/eslint-plugin@5.10.0(eslint@9.39.4)':
     dependencies:
@@ -4681,6 +4733,8 @@ snapshots:
 
   nanoid@3.3.11: {}
 
+  nanoid@5.1.7: {}
+
   natural-compare@1.4.0: {}
 
   natural-orderby@5.0.0: {}
@@ -5014,6 +5068,8 @@ snapshots:
     dependencies:
       '@pkgr/core': 0.2.9
 
+  tagged-tag@1.0.0: {}
+
   tapable@2.3.0: {}
 
   thread-stream@4.0.0:
@@ -5078,6 +5134,10 @@ snapshots:
       prelude-ls: 1.2.1
 
   type-fest@4.2.0: {}
+
+  type-fest@5.4.4:
+    dependencies:
+      tagged-tag: 1.0.0
 
   typescript@5.9.3: {}
 
