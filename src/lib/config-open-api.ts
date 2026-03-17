@@ -16,8 +16,13 @@ export default function configOpenAPI(app: AppOpenAPI) {
   app.get(
     "/reference",
     Scalar({
+      layout: "classic",
       url: "/doc",
       theme: "purple",
+      defaultHttpClient: {
+        targetKey: "node",
+        clientKey: "fetch",
+      },
     }),
   );
 }
