@@ -17,9 +17,7 @@ export function createRouter() {
 }
 
 export default function createApp() {
-  const app = new OpenAPIHono<AppBindings>({
-    strict: false,
-  });
+  const app = createRouter();
 
   app.use(serveEmojiFavicon("🔥"));
   app.use(requestId());
