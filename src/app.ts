@@ -1,9 +1,24 @@
+import type { PinoLogger } from "hono-pino";
+
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { logger } from "hono/logger";
+import { config } from "dotenv";
+import { expand } from "dotenv-expand";
+import { requestId } from "hono/request-id";
 import { notFound, onError } from "stoker/middlewares";
 
-const app = new OpenAPIHono();
-app.use(logger());
+import { pinoLogger } from "./middleware/pino-logger";
+
+expand(config());
+
+interface AppBindings {
+  Variables: {
+    logger: PinoLogger;
+  };
+}
+
+const app = new OpenAPIHono<AppBindings>();
+app.use(requestId());
+app.use(pinoLogger());
 
 app.get("/", (c) => {
   return c.text("Hello Hono!");
